@@ -5,12 +5,14 @@ def main(page: ft.Page):
     page.title = "Design example"
     page.theme_mode = ft.ThemeMode.DARK
     page.padding = 25
+    page.window.width = 1200
+    page.window.height = 800
     page.update()
 
     grid_view = ft.GridView(
         expand=1,
         runs_count=2,
-        max_extent=100,
+        max_extent=500,
         child_aspect_ratio=1.0,
         spacing=2,
         run_spacing=2,
@@ -24,31 +26,9 @@ def main(page: ft.Page):
                 padding=2,
                 alignment=ft.alignment.center,
                 bgcolor=ft.colors.GREY_700,
-                width=80,
-                height=40,
+                width=300,
+                height=200,
                 border_radius=10,
-            )
-        )
-
-    my_card = ft.Card(
-            content=ft.Container(
-                content=ft.Column(
-                    [
-                        ft.ListTile(
-                            leading=ft.Icon(ft.icons.ALBUM),
-                            title=ft.Text("The Enchanted Nightingale"),
-                            subtitle=ft.Text(
-                                "Music by Julie Gable. Lyrics by Sidney Stein."
-                            ),
-                        ),
-                        ft.Row(
-                            [ft.TextButton("Buy tickets"), ft.TextButton("Listen")],
-                            alignment=ft.MainAxisAlignment.END,
-                        ),
-                    ]
-                ),
-                width=400,
-                padding=10,
             )
         )
 
@@ -60,7 +40,7 @@ def main(page: ft.Page):
                 padding=1,
                 alignment=ft.alignment.center,
                 bgcolor=ft.colors.BLACK12,
-                width=400,
+                width=1100,
                 height=30,
                 border_radius=30,
                 shadow=ft.BoxShadow(
@@ -78,8 +58,8 @@ def main(page: ft.Page):
                 padding=1,
                 alignment=ft.alignment.center,
                 bgcolor=ft.colors.BLACK12,
-                width=400,
-                height=400,
+                width=1100,
+                height=650,
                 border_radius=30,
                 shadow=ft.BoxShadow(
                     spread_radius=1,
@@ -96,7 +76,7 @@ def main(page: ft.Page):
                 padding=1,
                 alignment=ft.alignment.center,
                 bgcolor=ft.colors.BLACK12,
-                width=400,
+                width=1100,
                 height=30,
                 border_radius=30,
                 shadow=ft.BoxShadow(
