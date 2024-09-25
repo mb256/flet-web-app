@@ -1,117 +1,50 @@
 import flet as ft
 
 
+class Header_link():
+    def __init__(self, text):
+        self.text_label = header_container = ft.Container(
+            ft.Text(text,
+                    theme_style=ft.TextThemeStyle.BODY_SMALL,
+                    text_align=ft.TextAlign.CENTER),
+            padding=5,
+            #bgcolor=ft.colors.GREY_900,
+            col={"sm": 6, "md": 4, "xl": 2},
+        )
+
+
 def main(page: ft.Page):
-    page.title = "Design example"
-    page.theme_mode = ft.ThemeMode.DARK
-    page.padding = 25
-    page.update()
+    def page_resize(e):
+        pw.value = f"{page.width} px"
+        pw.update()
 
-    grid_view = ft.GridView(
-        expand=1,
-        runs_count=2,
-        max_extent=100,
-        child_aspect_ratio=1.0,
-        spacing=2,
-        run_spacing=2,
+    page.on_resize = page_resize
+
+    pw = ft.Text(bottom=50, right=50, style="displaySmall")
+    page.overlay.append(pw)
+
+    page.add(
+        ft.ResponsiveRow(
+            [
+                Header_link("Contact me").text_label,
+                Header_link("linketIn profile").text_label,
+                Header_link("micro projects").text_label,
+                Header_link("blog").text_label,
+                Header_link("something 1").text_label,
+                Header_link("something 2").text_label,
+            ],
+        ),
+        ft.ResponsiveRow(
+            [
+                ft.TextField(label="TextField 1", col={"md": 6}),
+                ft.TextField(label="TextField 2", col={"md": 6}),
+                ft.TextField(label="TextField 3", col={"md": 6}),
+                ft.TextField(label="TextField 4", col={"md": 6}),
+            ],
+            run_spacing={"xs": 10},
+        ),
     )
-
-    for i in range(0, 90):
-        grid_view.controls.append(
-            ft.Container(
-                content=ft.Text(f"* {i} *"),
-                margin=2,
-                padding=2,
-                alignment=ft.alignment.center,
-                bgcolor=ft.colors.GREY_700,
-                width=80,
-                height=40,
-                border_radius=10,
-            )
-        )
-
-    my_card = ft.Card(
-            content=ft.Container(
-                content=ft.Column(
-                    [
-                        ft.ListTile(
-                            leading=ft.Icon(ft.icons.ALBUM),
-                            title=ft.Text("The Enchanted Nightingale"),
-                            subtitle=ft.Text(
-                                "Music by Julie Gable. Lyrics by Sidney Stein."
-                            ),
-                        ),
-                        ft.Row(
-                            [ft.TextButton("Buy tickets"), ft.TextButton("Listen")],
-                            alignment=ft.MainAxisAlignment.END,
-                        ),
-                    ]
-                ),
-                width=400,
-                padding=10,
-            )
-        )
-
-    row = ft.Column(
-        [
-            ft.Container(
-                content=ft.Text("Row A Row A Row A Row A Row A"),
-                margin=1,
-                padding=1,
-                alignment=ft.alignment.center,
-                bgcolor=ft.colors.BLACK12,
-                width=400,
-                height=30,
-                border_radius=30,
-                shadow=ft.BoxShadow(
-                    spread_radius=1,
-                    blur_radius=4,
-                    color=ft.colors.BLUE_GREY_300,
-                    offset=ft.Offset(0, 0),
-                    blur_style=ft.ShadowBlurStyle.OUTER,
-                )
-            ),
-
-            ft.Container(
-                content=grid_view,
-                margin=1,
-                padding=1,
-                alignment=ft.alignment.center,
-                bgcolor=ft.colors.BLACK12,
-                width=400,
-                height=400,
-                border_radius=30,
-                shadow=ft.BoxShadow(
-                    spread_radius=1,
-                    blur_radius=4,
-                    color=ft.colors.BLUE_GREY_300,
-                    offset=ft.Offset(0, 0),
-                    blur_style=ft.ShadowBlurStyle.OUTER,
-                )
-            ),
-
-            ft.Container(
-                content=ft.Text("Row B Row B Row B Row B Row B"),
-                margin=1,
-                padding=1,
-                alignment=ft.alignment.center,
-                bgcolor=ft.colors.BLACK12,
-                width=400,
-                height=30,
-                border_radius=30,
-                shadow=ft.BoxShadow(
-                    spread_radius=1,
-                    blur_radius=4,
-                    color=ft.colors.BLUE_GREY_300,
-                    offset=ft.Offset(0, 0),
-                    blur_style=ft.ShadowBlurStyle.OUTER,
-                )
-            ),
-        ]
-    )
-
-    page.add(row)
-    page.update()
+    page_resize(None)
 
 
-ft.app(target=main)
+ft.app(main)
