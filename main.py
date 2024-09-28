@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class Header_link():
+class Header_link:
     def __init__(self, text):
         self.text_label = header_container = ft.Container(
             ft.Text(text,
@@ -13,12 +13,19 @@ class Header_link():
         )
 
 
+class TextParagraph:
+    def __init__(self, text_par):
+        self.text_paragraph = ft.Text(value=text_par, col={"md": 6}, text_align=ft.TextAlign.CENTER,
+                                      max_lines=10, expand=True, width=200, height=400)
+
+
 def main(page: ft.Page):
     def page_resize(e):
         pw.value = f"{page.width} px"
         pw.update()
 
     page.on_resize = page_resize
+    page.scroll = True
 
     pw = ft.Text(bottom=50, right=50, style="displaySmall")
     page.overlay.append(pw)
@@ -36,10 +43,11 @@ def main(page: ft.Page):
         ),
         ft.ResponsiveRow(
             [
-                ft.TextField(label="TextField 1", col={"md": 6}),
-                ft.TextField(label="TextField 2", col={"md": 6}),
-                ft.TextField(label="TextField 3", col={"md": 6}),
-                ft.TextField(label="TextField 4", col={"md": 6}),
+                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").text_paragraph,
+                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").text_paragraph,
+                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").text_paragraph,
+                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").text_paragraph,
+                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").text_paragraph,
             ],
             run_spacing={"xs": 10},
         ),
