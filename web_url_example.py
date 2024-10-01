@@ -52,6 +52,7 @@ def main(page: Page):
                     [
                         AppBar(title=Text("My page"), bgcolor=colors.SURFACE_VARIANT),
                         Text("Welcome to my page!", size=36, color=colors.PINK_200),
+                        ElevatedButton("Go to seznam.cz", on_click=open_seznam),
                     ]
                 )
             )
@@ -74,6 +75,9 @@ def main(page: Page):
 
     def open_my_page(e):
         page.go("/my_page")
+
+    def open_seznam(e):
+        page.launch_url('https://seznam.cz')
 
     page.go(page.route)
 
