@@ -3,12 +3,12 @@ import flet as ft
 
 class Header_link:
     def __init__(self, text):
-        self.text_label = header_container = ft.Container(
+        self.text_label = ft.Container(
             ft.Text(text,
                     theme_style=ft.TextThemeStyle.BODY_SMALL,
                     text_align=ft.TextAlign.CENTER),
             padding=5,
-            #bgcolor=ft.colors.GREY_900,
+            # bgcolor=ft.colors.GREY_900,
             col={"sm": 6, "md": 4, "xl": 2},
         )
 
@@ -20,6 +20,18 @@ class TextParagraph:
 
 
 def main(page: ft.Page):
+    def open_seznam(e):
+        page.launch_url("https://seznam.cz")
+
+    class MyTextButton:
+
+        def __init__(self, btn_text: str, function):
+            self.link_button_container = ft.Container(
+                ft.TextButton(text=btn_text, on_click=function),
+                padding=5,
+                col={"sm": 6, "md": 4, "xl": 2},
+            )
+
     def page_resize(e):
         pw.value = f"{page.width} px"
         pw.update()
@@ -37,8 +49,7 @@ def main(page: ft.Page):
                 Header_link("linketIn profile").text_label,
                 Header_link("micro projects").text_label,
                 Header_link("blog").text_label,
-                Header_link("something 1").text_label,
-                Header_link("something 2").text_label,
+                MyTextButton("My text btn 1", open_seznam).link_button_container,
             ],
         ),
         ft.ResponsiveRow(
@@ -55,4 +66,5 @@ def main(page: ft.Page):
     page_resize(None)
 
 
-ft.app(main)
+# ft.app(main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
