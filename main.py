@@ -20,14 +20,22 @@ class TextParagraph:
 
 
 def main(page: ft.Page):
+
+    def open_google(e):
+        page.launch_url("https://google.com")
+
     def open_seznam(e):
         page.launch_url("https://seznam.cz")
+
+    def open_root(e):
+        page.launch_url("https://root.cz")
 
     class MyTextButton:
 
         def __init__(self, btn_text: str, function):
             self.link_button_container = ft.Container(
-                ft.TextButton(text=btn_text, on_click=function),
+                ft.TextButton(text=btn_text, on_click=function,
+                              style=ft.ButtonStyle(color=ft.colors.WHITE)),
                 padding=5,
                 col={"sm": 6, "md": 4, "xl": 2},
             )
@@ -38,6 +46,7 @@ def main(page: ft.Page):
 
     page.on_resize = page_resize
     page.scroll = True
+    page.theme_mode = ft.ThemeMode.DARK
 
     pw = ft.Text(bottom=50, right=50, style="displaySmall")
     page.overlay.append(pw)
@@ -45,10 +54,10 @@ def main(page: ft.Page):
     page.add(
         ft.ResponsiveRow(
             [
-                Header_link("Contact me").text_label,
-                Header_link("linketIn profile").text_label,
-                Header_link("micro projects").text_label,
-                Header_link("blog").text_label,
+                MyTextButton("Contact", open_google).link_button_container,
+                MyTextButton("LinkedIn", open_google).link_button_container,
+                MyTextButton("Micro projects", open_google).link_button_container,
+                MyTextButton("Blog", open_google).link_button_container,
                 MyTextButton("My text btn 1", open_seznam).link_button_container,
             ],
         ),
