@@ -68,10 +68,10 @@ class DynamicTextOnBackground:
 
 
 class TextParagraph:
-    def __init__(self, text_par):
+    def __init__(self, text_par, to_key=None):
         self.content = ft.Container(
             ft.Text(value=text_par, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER,
-                    expand=True, width=200, height=400),
+                    expand=True, width=200, height=400, key=to_key),
             #alignment=ft.alignment.center,
             col={"md": 6},
         )
@@ -79,6 +79,10 @@ class TextParagraph:
 
 def main(page: ft.Page):
     page.bgcolor = ft.colors.BLACK
+
+    def go_to_contact(e):
+        page.scroll_to(key="to_contact")
+        #page.launch_url("https://google.com")
 
     def open_google(e):
         page.launch_url("https://google.com")
@@ -125,7 +129,7 @@ def main(page: ft.Page):
     page.add(
         ft.ResponsiveRow(
             [
-                MyTextButton("Contact", open_google).link_button_container,
+                MyTextButton("Contact", go_to_contact).link_button_container,
                 MyTextButton("LinkedIn", open_google).link_button_container,
                 MyTextButton("Micro projects", open_google).link_button_container,
                 MyTextButton("Blog", open_google).link_button_container,
@@ -140,6 +144,10 @@ def main(page: ft.Page):
                 TextParagraph("\n\n\nBlog article 1\n\nBlog article 2\n\nBlog article 3\n").content,
                 TextParagraph("\n\n\nMicro project 1\n\nMicro project 2\n\nMicro project 3\n").content,
                 TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").content,
+
+                TextParagraph("\n\n\nContacts\n\n"
+                              "email: bla ble blo\n\n"
+                              "back to top", to_key="to_contact").content,
             ],
             run_spacing={"xs": 10},
         ),
