@@ -28,7 +28,7 @@ class HeaderLink:
             ft.Text(text,
                     theme_style=ft.TextThemeStyle.BODY_SMALL,
                     text_align=ft.TextAlign.CENTER),
-            padding=5,
+            padding=1,
             # bgcolor=ft.colors.GREY_900,
             col={"sm": 6, "md": 4, "xl": 2},
         )
