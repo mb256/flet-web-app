@@ -111,7 +111,7 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.DARK
 
     # Dynamic text on background
-    background_image = DynamicTextOnBackground(messages, "/family_dark_dark_edge.jpg")
+    background_image = DynamicTextOnBackground(messages, "/family_dark_dark_edge_1.jpg")
     page.run_task(background_image.update_message)
 
     main_info = TextParagraph("\n\n\n\n\n"
@@ -147,5 +147,5 @@ def main(page: ft.Page):
     page_resize(None)
 
 
-ft.app(main)
-#ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+#ft.app(main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
