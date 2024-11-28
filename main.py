@@ -67,6 +67,39 @@ class DynamicTextOnBackground:
             self.message.value = ""
 
 
+class ProjectParagraph(ft.Column):
+    def __init__(self, headline, text, picture, to_key=None):
+        super().__init__()
+        self.headline = ft.Text(value=headline, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER)
+
+        self.text_with_picture = ft.Row(
+            [
+                ft.Text(value=text, size=16, col={"md": 6}, expand=True),
+                ft.Text(value="PICTURE PLACEHOLDER", size=10, col={"md": 6}, expand=True),
+                #None
+            ]
+        )
+
+        self.project_link = ft.Container(
+            ft.TextButton(text="go to github", on_click=None,
+                          style=ft.ButtonStyle(color=ft.colors.WHITE)),
+            padding=5,
+            col={"sm": 6, "md": 4, "xl": 2},
+        )
+
+        self.controls = [
+            self.headline,
+            self.text_with_picture,
+            self.project_link
+        ]
+
+        self.col = {"md": 6}
+        self.expand = True
+        self.width = 200
+        self.height = 400
+        self.key = to_key
+
+
 class TextParagraph:
     def __init__(self, text_par, to_key=None):
         self.content = ft.Container(
@@ -143,10 +176,13 @@ def main(page: ft.Page):
 
                 TextParagraph("\n\n\nBlog article 1\n\nBlog article 2\n\nBlog article 3\n").content,
                 TextParagraph("\n\n\nMicro project 1\n\nMicro project 2\n\nMicro project 3\n").content,
+
+                ProjectParagraph("Mini Project 1", "Description of project number one", None),
+
                 TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").content,
 
                 TextParagraph("\n\n\nContacts\n\n"
-                              "email: bla ble blo\n\n"
+                              "email: mb256@seznam.cz\n\n"
                               "back to top", to_key="to_contact").content,
             ],
             run_spacing={"xs": 10},
