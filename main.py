@@ -79,11 +79,24 @@ class ProjectParagraph(ft.Column):
             ]
         )
 
+        def go_to_github(e):
+            # External link to github ...
+            # TODO:
+            pass
+
+        # TODO:
+        self.to_project_link = ft.Container(
+            ft.TextButton(text="go to project", on_click=go_to_github,
+                          style=ft.ButtonStyle(color=ft.colors.WHITE)),
+            padding=5,
+            col={"sm": 6, "md": 4, "xl": 2},
+        )
+
         def go_to_top(e):
             page.scroll_to(key="to_top")
 
-        self.project_link = ft.Container(
-            ft.TextButton(text="go to github", on_click=go_to_top,
+        self.to_top_link = ft.Container(
+            ft.TextButton(text="go to top", on_click=go_to_top,
                           style=ft.ButtonStyle(color=ft.colors.WHITE)),
             padding=5,
             col={"sm": 6, "md": 4, "xl": 2},
@@ -92,7 +105,13 @@ class ProjectParagraph(ft.Column):
         self.controls = [
             self.headline,
             self.text_with_picture,
-            self.project_link
+            ft.Row(
+                [
+                    self.to_project_link,
+                    self.to_top_link
+                ]
+            )
+
         ]
 
         self.col = {"md": 6}
