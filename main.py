@@ -1,7 +1,6 @@
 import flet as ft
 import asyncio
 
-
 messages = [
     "Work smart not hard",
     "Assume you can learn something new from everyone",
@@ -76,7 +75,7 @@ class ProjectParagraph(ft.Column):
             [
                 ft.Text(value=text, size=16, col={"md": 6}, expand=True),
                 ft.Text(value="PICTURE PLACEHOLDER", size=10, col={"md": 6}, expand=True),
-                #None
+                # None
             ]
         )
 
@@ -105,7 +104,7 @@ class TextParagraph:
         self.content = ft.Container(
             ft.Text(value=text_par, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER,
                     expand=True, width=200, height=400, key=to_key),
-            #alignment=ft.alignment.center,
+            # alignment=ft.alignment.center,
             col={"md": 6},
         )
 
@@ -115,7 +114,10 @@ def main(page: ft.Page):
 
     def go_to_contact(e):
         page.scroll_to(key="to_contact")
-        #page.launch_url("https://google.com")
+        # page.launch_url("https://google.com")
+
+    def go_to_top(e):
+        page.scroll_to(key="to_top")
 
     def open_google(e):
         page.launch_url("https://google.com")
@@ -128,12 +130,31 @@ def main(page: ft.Page):
 
     class MyTextButton:
 
-        def __init__(self, btn_text: str, function):
+        def __init__(self, btn_text: str, function, to_key=None):
             self.link_button_container = ft.Container(
                 ft.TextButton(text=btn_text, on_click=function,
-                              style=ft.ButtonStyle(color=ft.colors.WHITE)),
-                padding=5,
+                              style=ft.ButtonStyle(color=ft.colors.WHITE),
+                              key=to_key),
+                padding=3,
                 col={"sm": 6, "md": 4, "xl": 2},
+            )
+
+    class TextParagraphWithButton:
+        def __init__(self, text_par: str, go_function=None):
+            to_top = MyTextButton("Back to Top", go_function).link_button_container
+
+            self.content = ft.Column(
+                [
+                    ft.Container(
+                        ft.Text(value=text_par, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER,
+                                expand=True),
+                        # alignment=ft.alignment.center,
+                        col={"md": 6},
+                        padding=2,
+                        margin=2,
+                    ),
+                    to_top,
+                ]
             )
 
     def page_resize(e):
@@ -162,7 +183,7 @@ def main(page: ft.Page):
     page.add(
         ft.ResponsiveRow(
             [
-                MyTextButton("Contact", go_to_contact).link_button_container,
+                MyTextButton("Contact", go_to_contact, to_key="to_top").link_button_container,
                 MyTextButton("LinkedIn", open_google).link_button_container,
                 MyTextButton("Micro projects", open_google).link_button_container,
                 MyTextButton("Blog", open_google).link_button_container,
@@ -184,6 +205,8 @@ def main(page: ft.Page):
                 TextParagraph("\n\n\nContacts\n\n"
                               "email: mb256@seznam.cz\n\n"
                               "back to top", to_key="to_contact").content,
+
+                TextParagraphWithButton(text_par="\n\n\nContacts\n\nemail: mb256@seznam.cz\n\n", go_function=go_to_top).content,
             ],
             run_spacing={"xs": 10},
         ),
@@ -191,5 +214,5 @@ def main(page: ft.Page):
     page_resize(None)
 
 
-#ft.app(main)
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+ft.app(main)
+#ft.app(target=main, view=ft.AppView.WEB_BROWSER)
