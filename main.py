@@ -140,31 +140,34 @@ def main(page: ft.Page):
             )
 
     class TextParagraphWithButton:
-        def __init__(self, text_par: str, go_function=None):
+        def __init__(self, text_par: str, go_function=None, key_dest=None):
             to_top = MyTextButton("Back to Top", go_function).link_button_container
 
             self.content = ft.Column(
                 [
                     ft.Container(
                         ft.Text(value=text_par, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER,
-                                expand=True),
+                                expand=True, key=key_dest),
                         # alignment=ft.alignment.center,
                         col={"md": 6},
                         padding=2,
                         margin=2,
                     ),
                     to_top,
-                ]
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER
             )
 
-    def page_resize(e):
-        pw.value = f"{page.width} px"
-        pw.update()
+    # def page_resize(e):
+    #     pw.value = f"{page.width} px"
+    #     pw.update()
 
     pw = ft.Text(bottom=50, right=50, style="displaySmall")
     page.overlay.append(pw)
 
-    page.on_resize = page_resize
+    #page.on_resize = page_resize
+
     page.scroll = True
     page.theme_mode = ft.ThemeMode.DARK
 
@@ -195,24 +198,22 @@ def main(page: ft.Page):
                 main_info.content,
                 background_image.content,
 
-                TextParagraph("\n\n\nBlog article 1\n\nBlog article 2\n\nBlog article 3\n").content,
-                TextParagraph("\n\n\nMicro project 1\n\nMicro project 2\n\nMicro project 3\n").content,
+                #TextParagraph("\n\n\nBlog article 1\n\nBlog article 2\n\nBlog article 3\n").content,
+                #TextParagraph("\n\n\nMicro project 1\n\nMicro project 2\n\nMicro project 3\n").content,
 
                 ProjectParagraph("Mini Project 1", "Description of project number one", None),
+                ProjectParagraph("Mini Project 2", "Description of project number one", None),
+                ProjectParagraph("Mini Project 3", "Description of project number one", None),
+                ProjectParagraph("Mini Project 4", "Description of project number one", None),
+                ProjectParagraph("Mini Project 5", "Description of project number one", None),
 
-                TextParagraph("\n\n\nTextField 1\nTextField 2\nTextField 3\n").content,
-
-                TextParagraph("\n\n\nContacts\n\n"
-                              "email: mb256@seznam.cz\n\n"
-                              "back to top", to_key="to_contact").content,
-
-                TextParagraphWithButton(text_par="\n\n\nContacts\n\nemail: mb256@seznam.cz\n\n", go_function=go_to_top).content,
+                TextParagraphWithButton(text_par="\n\n\nContact\n\nemail: mb256@seznam.cz\n\n", go_function=go_to_top, key_dest="to_contact").content,
             ],
             run_spacing={"xs": 10},
         ),
     )
-    page_resize(None)
+    #page_resize(None)
 
 
-ft.app(main)
-#ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+#ft.app(main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
