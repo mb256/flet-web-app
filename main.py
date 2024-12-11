@@ -67,10 +67,10 @@ class DynamicTextOnBackground:
 
 
 class ProjectParagraph(ft.Column):
-    def __init__(self, headline, text, picture, to_key=None):
+    def __init__(self, page: ft.Page, headline, text, picture, to_key=None):
         super().__init__()
-        self.headline = ft.Text(value=headline, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER)
 
+        self.headline = ft.Text(value=headline, size=22, col={"md": 6}, text_align=ft.TextAlign.CENTER)
         self.text_with_picture = ft.Row(
             [
                 ft.Text(value=text, size=16, col={"md": 6}, expand=True),
@@ -79,8 +79,11 @@ class ProjectParagraph(ft.Column):
             ]
         )
 
+        def go_to_top(e):
+            page.scroll_to(key="to_top")
+
         self.project_link = ft.Container(
-            ft.TextButton(text="go to github", on_click=None,
+            ft.TextButton(text="go to github", on_click=go_to_top,
                           style=ft.ButtonStyle(color=ft.colors.WHITE)),
             padding=5,
             col={"sm": 6, "md": 4, "xl": 2},
@@ -190,7 +193,6 @@ def main(page: ft.Page):
                 MyTextButton("LinkedIn", open_google).link_button_container,
                 MyTextButton("Micro projects", open_google).link_button_container,
                 MyTextButton("Blog", open_google).link_button_container,
-                MyTextButton("My text btn 1", open_seznam).link_button_container,
             ],
         ),
         ft.ResponsiveRow(
@@ -200,12 +202,11 @@ def main(page: ft.Page):
 
                 #TextParagraph("\n\n\nBlog article 1\n\nBlog article 2\n\nBlog article 3\n").content,
                 #TextParagraph("\n\n\nMicro project 1\n\nMicro project 2\n\nMicro project 3\n").content,
-
-                ProjectParagraph("Mini Project 1", "Description of project number one", None),
-                ProjectParagraph("Mini Project 2", "Description of project number one", None),
-                ProjectParagraph("Mini Project 3", "Description of project number one", None),
-                ProjectParagraph("Mini Project 4", "Description of project number one", None),
-                ProjectParagraph("Mini Project 5", "Description of project number one", None),
+                ProjectParagraph(page, "Mini Project 1", "Description of project number one", None),
+                ProjectParagraph(page, "Mini Project 2", "Description of project number one", None),
+                ProjectParagraph(page, "Mini Project 3", "Description of project number one", None),
+                ProjectParagraph(page, "Mini Project 4", "Description of project number one", None),
+                ProjectParagraph(page, "Mini Project 5", "Description of project number one", None),
 
                 TextParagraphWithButton(text_par="\n\n\nContact\n\nemail: mb256@seznam.cz\n\n", go_function=go_to_top, key_dest="to_contact").content,
             ],
